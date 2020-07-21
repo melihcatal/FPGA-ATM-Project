@@ -1,0 +1,360 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> Reading design: atm.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "atm.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "atm"
+Output Format                      : NGC
+Target Device                      : xc3s100e-4-tq144
+
+---- Source Options
+Top Module Name                    : atm
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "atm.v" in library work
+Module <atm> compiled
+No errors in compilation
+Analysis of file <"atm.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <atm> in library <work> with parameters.
+	ATM_MENU = "0101"
+	IDLE = "0000"
+	LOCK = "0100"
+	MONEY = "0110"
+	PASS_CHG_1 = "1010"
+	PASS_CHG_2 = "1001"
+	PASS_CHG_3 = "1000"
+	PASS_ENT_1 = "0011"
+	PASS_ENT_2 = "0010"
+	PASS_ENT_3 = "0001"
+	PASS_NEW = "1011"
+	WARNING = "0111"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <atm>.
+	ATM_MENU = 4'b0101
+	IDLE = 4'b0000
+	LOCK = 4'b0100
+	MONEY = 4'b0110
+	PASS_CHG_1 = 4'b1010
+	PASS_CHG_2 = 4'b1001
+	PASS_CHG_3 = 4'b1000
+	PASS_ENT_1 = 4'b0011
+	PASS_ENT_2 = 4'b0010
+	PASS_ENT_3 = 4'b0001
+	PASS_NEW = 4'b1011
+	WARNING = 4'b0111
+Module <atm> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+INFO:Xst:2679 - Register <password> in unit <atm> has a constant value of 0000 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <balance> in unit <atm> has a constant value of 0000000000000000 during circuit operation. The register is replaced by logic.
+
+Synthesizing Unit <atm>.
+    Related source file is "atm.v".
+WARNING:Xst:1306 - Output <digit1> is never assigned.
+WARNING:Xst:1306 - Output <digit2> is never assigned.
+WARNING:Xst:1306 - Output <digit3> is never assigned.
+WARNING:Xst:1306 - Output <digit4> is never assigned.
+WARNING:Xst:1306 - Output <LED> is never assigned.
+WARNING:Xst:737 - Found 4-bit latch for signal <password>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 16-bit latch for signal <balance>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Using one-hot encoding for signal <current_state>.
+INFO:Xst:2117 - HDL ADVISOR - Mux Selector <current_state> of Case statement line 74 was re-encoded using one-hot encoding. The case statement will be optimized (default statement optimization), but this optimization may lead to design initialization problems. To ensure the design works safely, you can:
+   	- add an 'INIT' attribute on signal <current_state> (optimization is then done without any risk)
+   	- use the attribute 'signal_encoding user' to avoid onehot optimization
+   	- use the attribute 'safe_implementation yes' to force XST to perform a safe (but less efficient) optimization
+WARNING:Xst:737 - Found 9-bit latch for signal <counter>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+WARNING:Xst:737 - Found 12-bit latch for signal <next_state>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+    Found 16-bit addsub for signal <balance$share0000>.
+    Found 9-bit up counter for signal <counter>.
+    Found 9-bit adder for signal <counter$share0000> created at line 74.
+    Found 12-bit register for signal <current_state>.
+    Found 4-bit comparator equal for signal <next_state$cmp_eq0000> created at line 87.
+    Found 16-bit comparator greatequal for signal <next_state$cmp_ge0000> created at line 152.
+    Found 16-bit comparator less for signal <next_state$cmp_lt0000> created at line 152.
+    Found 4-bit comparator not equal for signal <next_state$cmp_ne0000> created at line 89.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred   4 Comparator(s).
+Unit <atm> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 16-bit addsub                                         : 1
+ 9-bit adder                                           : 1
+# Counters                                             : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 1
+ 12-bit register                                       : 1
+# Latches                                              : 4
+ 12-bit latch                                          : 1
+ 16-bit latch                                          : 1
+ 4-bit latch                                           : 1
+ 9-bit latch                                           : 1
+# Comparators                                          : 4
+ 16-bit comparator greatequal                          : 1
+ 16-bit comparator less                                : 1
+ 4-bit comparator equal                                : 1
+ 4-bit comparator not equal                            : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Adders/Subtractors                                   : 2
+ 16-bit addsub                                         : 1
+ 9-bit adder                                           : 1
+# Counters                                             : 1
+ 9-bit up counter                                      : 1
+# Registers                                            : 12
+ Flip-Flops                                            : 12
+# Latches                                              : 4
+ 12-bit latch                                          : 1
+ 16-bit latch                                          : 1
+ 4-bit latch                                           : 1
+ 9-bit latch                                           : 1
+# Comparators                                          : 4
+ 16-bit comparator greatequal                          : 1
+ 16-bit comparator less                                : 1
+ 4-bit comparator equal                                : 1
+ 4-bit comparator not equal                            : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <password<3>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LDE instance <password/3/0>
+   Signal <password<3>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <password<2>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LDE instance <password/2/0>
+   Signal <password<2>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <password<1>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LDE instance <password/1/0>
+   Signal <password<1>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <password<0>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LDE instance <password/0/0>
+   Signal <password<0>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<15>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/15/0>
+   Signal <balance<15>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<14>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/14/0>
+   Signal <balance<14>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<13>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/13/0>
+   Signal <balance<13>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<12>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/12/0>
+   Signal <balance<12>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<11>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/11/0>
+   Signal <balance<11>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<10>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/10/0>
+   Signal <balance<10>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<9>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/9/0>
+   Signal <balance<9>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<8>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/8/0>
+   Signal <balance<8>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<7>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/7/0>
+   Signal <balance<7>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<6>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/6/0>
+   Signal <balance<6>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<5>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/5/0>
+   Signal <balance<5>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<4>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/4/0>
+   Signal <balance<4>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<3>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/3/0>
+   Signal <balance<3>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<2>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/2/0>
+   Signal <balance<2>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<1>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/1/0>
+   Signal <balance<1>> in Unit <atm> is assigned to GND
+
+ERROR:Xst:528 - Multi-source in Unit <atm> on signal <balance<0>>; this signal is connected to multiple drivers.
+Drivers are: 
+   Output signal of LD instance <balance/0/0>
+   Signal <balance<0>> in Unit <atm> is assigned to GND
+
+
+Total REAL time to Xst completion: 3.00 secs
+Total CPU time to Xst completion: 3.15 secs
+ 
+--> 
+
+Total memory usage is 4468044 kilobytes
+
+Number of errors   :   20 (   0 filtered)
+Number of warnings :    9 (   0 filtered)
+Number of infos    :    6 (   0 filtered)
+
